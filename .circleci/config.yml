@@ -46,7 +46,7 @@ jobs:
           command: docker build -t $IMAGE_NAME:latest .
   publish-image:
     environment:
-      IMAGE_NAME: ci-demo-application
+      IMAGE_NAME: stevenfraser/ci-demo-application
     docker:
       - image: circleci/buildpack-deps:stretch
     steps:
