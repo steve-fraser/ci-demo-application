@@ -72,21 +72,9 @@ jobs:
             docker push $IMAGE_NAME:latest
             docker push $IMAGE_NAME:$IMAGE_TAG
 workflows:
-  version: 2
-  # Below is the definition of your workflow.
-  # Inside the workflow, you provide the jobs you want to run, e.g this workflow runs the build-and-test job above.
-  # CircleCI will run this workflow on every commit.
-  # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
-  build-master:
+  build_and_test:
     jobs:
-      - run-tests
-      - build:
-          filters:
-            branches:
-              only: master
+      - build
       - publish-latest:
           requires:
             - build
-          filters:
-            branches:
-              only: master
