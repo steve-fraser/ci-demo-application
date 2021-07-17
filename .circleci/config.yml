@@ -72,7 +72,7 @@ jobs:
             docker push $IMAGE_NAME:latest
             docker push $IMAGE_NAME:$IMAGE_TAG
 workflows:
-  build_and_test:
+  release_latest:
     jobs:
       - run-tests
       - build
