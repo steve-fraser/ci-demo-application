@@ -76,7 +76,7 @@ workflows:
     jobs:
       - run-tests
       - build:
-        requires:
+          requires:
           - run-tests
       - publish-latest:
           requires:
