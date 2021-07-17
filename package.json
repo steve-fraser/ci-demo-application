@@ -1,0 +1,22 @@
+{
+  "name": "ci-demo-web-application",
+  "version": "1.0.0",
+  "description": "Node.js on Docker",
+  "author": "Steven Fraser setevenrfraser7@gmail.com",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha --timeout 10000"
+  },
+  "dependencies": {
+    "express": "^4.16.1",
+    "eero-js-api": "0.0.2",
+    "prom-client": "11.2.0",
+    "ejs": "3.1.5"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "mocha": "^2.4.5"
+  }
+}

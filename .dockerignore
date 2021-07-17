@@ -1,0 +1,21 @@
+.vscode
+.vs
+
+ci-web-application.sln
+
+node_modules
+npm-debug.log
+ci-web-application.njsproj
+ci-web-application.njsproj.user
+obj
+bin
+UpgradeLog.htm
+
+
+npm-debug.log
+# Mac
+.DS_Store
+
+# Node
+node_modules
+package-lock.json
