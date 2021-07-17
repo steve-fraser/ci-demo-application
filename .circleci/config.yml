@@ -11,7 +11,7 @@ orbs:
 
 jobs:
   # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
-  build-and-test:  
+  run-tests:  
     # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
     # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/node
@@ -33,7 +33,29 @@ jobs:
       - run:
           name: Run tests
           command: npm test
-
+  build-image:
+    environment:
+      IMAGE_NAME: stevenfraser/ci-demo-application
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build Docker image
+          command: docker build -t $IMAGE_NAME:latest .
+  publish-latest:
+    environment:
+      IMAGE_NAME: building-on-ci
+    docker:
+    - image: circleci/buildpack-deps:stretch
+    steps:
+    - setup_remote_docker
+    - run:
+      name: Publish Docker Image to Docker Hub
+      command: |
+        echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+        docker push $IMAGE_NAME:latest
 workflows:
   # Below is the definition of your workflow.
   # Inside the workflow, you provide the jobs you want to run, e.g this workflow runs the build-and-test job above.
