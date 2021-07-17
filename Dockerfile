@@ -16,7 +16,6 @@ RUN npm install
 COPY package*.json ./
 
 COPY . .
-RUN npm test
 
 EXPOSE 3000
 CMD [ "npm", "start" ]
