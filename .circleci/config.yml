@@ -6,6 +6,7 @@ orbs:
   # Orbs reduce the amount of configuration required for common tasks. 
   # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/node
   node: circleci/node@4.1
+  azure-aks: circleci/azure-aks@0.3.0
   kubernetes: circleci/kubernetes@0.12.0
 
 executors:
@@ -73,13 +74,16 @@ jobs:
             docker push $IMAGE_NAME:latest
             docker push $IMAGE_NAME:$IMAGE_TAG
   deploy-kubernetes:
+    executor: azure-aks/default
     docker:
       - image: 'cimg/base:stable'
     steps:
       - checkout
-      - kubernetes/install-kubectl
-      - kubernetes/install-kubeconfig:
-          kubeconfig: $KUBECONFIG
+      - azure-aks/update-kubeconfig-with-credentials:
+          cluster-name: CircleCI-Cluster
+          install-kubectl: true
+          perform-login: true
+          resource-group: CircleCI-RG
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
           resource-file-path: kubernetes/deployment.yaml
