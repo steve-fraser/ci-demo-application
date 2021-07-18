@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  name: ci-demo-application
+  labels:
+    app: ci-demo-application
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ci-demo-application
+  template:
+    metadata:
+      labels:
+        app: ci-demo-application
+    spec:
+      containers:
+      - name: ci-demo-application
+        image: stevenfraser/ci-demo-application
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+          name: web
