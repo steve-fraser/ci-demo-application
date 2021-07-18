@@ -6,6 +6,7 @@ orbs:
   # Orbs reduce the amount of configuration required for common tasks. 
   # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/node
   node: circleci/node@4.1
+  kubernetes: circleci/kubernetes@0.12.0
 
 executors:
   docker-publisher:
@@ -71,6 +72,19 @@ jobs:
             docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
             docker push $IMAGE_NAME:latest
             docker push $IMAGE_NAME:$IMAGE_TAG
+  deploy-kubernetes:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - checkout
+      - kubernetes/install-kubectl
+      - kubernetes/install-kubeconfig:
+          kubeconfig: $KUBECONFIG
+      - kubernetes/create-or-update-resource:
+          get-rollout-status: true
+          resource-file-path: kubernetes/deployment.yaml
+          resource-name: deployment/ci-demo-application
+          show-kubectl-command: true
 workflows:
   release_latest:
     jobs:
@@ -81,3 +95,6 @@ workflows:
       - publish-latest:
           requires:
             - build
+      - deploy-kubernetes:
+          requires:
+            - publish-latest        
