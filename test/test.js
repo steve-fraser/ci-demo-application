@@ -22,6 +22,7 @@ describe('API', () => {
             .send(body)
             .end((err, res) => {
                   res.should.have.status(200);
+                  res.body.numberOfChucks.should.be.eql("5");
               done();
             });
       });
