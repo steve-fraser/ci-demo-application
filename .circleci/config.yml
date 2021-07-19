@@ -94,6 +94,11 @@ jobs:
           resource-file-path: kubernetes/deployment.yaml
           resource-name: deployment/ci-demo-application
           show-kubectl-command: true
+      - kubernetes/create-or-update-resource:
+          get-rollout-status: true
+          resource-file-path: kubernetes/service.yaml
+          resource-name: service/ci-demo-application
+          show-kubectl-command: true
 workflows:
   release_latest:
     jobs:
