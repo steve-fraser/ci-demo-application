@@ -21,8 +21,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/submit', function (req, res) {
-    var validationCode = req.body.numberOfChucks;
-    var numberOfChucks = validationCode;
+    var numberOfChucks = req.body.numberOfChucks;
     res.render(__dirname + "/index.html", { numberOfChucks: numberOfChucks });
 })
 

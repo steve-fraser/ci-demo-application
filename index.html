@@ -78,6 +78,7 @@
                     <div class="panel-body">
                         <h4>You entered</h4>
                         <div id="numberOfChucksDivs">
+                            <%= numberOfChucks %>
                         </div>
                     </div>
                 </div>
@@ -102,7 +103,7 @@
 <script>
     function setVisibility() {
       var numberOfChucks = "<%= numberOfChucks %>";
-      if (isInteger(numberOfChucks)) {
+      if (!isInteger(numberOfChucks)) {
         document.getElementById("numberOfChucksDivs").innerHTML = numberOfChucks;
       } 
     }

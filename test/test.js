@@ -19,11 +19,11 @@ describe('API', () => {
           }
         chai.request(server)
             .post('/submit')
+            .set('content-type', 'application/x-www-form-urlencoded')
             .send(body)
             .end((err, res) => {
                   res.should.have.status(200);
-                  console.log(res);
-                  res.body.should.be.eql(body); // passes test
+                  res.text.should.have.match(/(?:numberOfChucks = "5")/)
               done();
             });
       });
