@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 app.post('/submit', function (req, res) {
     var validationCode = req.body.numberOfChucks;
     var cookie = validationCode;
-    res.render(__dirname + "/successful.html", { cookie: cookie });
+    res.render(__dirname + "/index.html", { cookie: cookie });
 })
 
 app.listen(PORT, HOST);

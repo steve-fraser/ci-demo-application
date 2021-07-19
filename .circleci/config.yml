@@ -84,6 +84,11 @@ jobs:
           install-kubectl: true
           perform-login: true
           resource-group: CircleCI-RG
+      - kubernetes/delete-resource:
+          now: true
+          resource-names: ci-demo-application
+          resource-types: deployments
+          wait: true
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
           resource-file-path: kubernetes/deployment.yaml
