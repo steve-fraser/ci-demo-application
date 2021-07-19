@@ -22,8 +22,8 @@ app.get('/', (req, res) => {
 
 app.post('/submit', function (req, res) {
     var validationCode = req.body.numberOfChucks;
-    var cookie = validationCode;
-    res.render(__dirname + "/index.html", { cookie: cookie });
+    var numberOfChucks = validationCode;
+    res.render(__dirname + "/index.html", { numberOfChucks: numberOfChucks });
 })
 
 app.listen(PORT, HOST);
