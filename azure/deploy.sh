@@ -18,7 +18,3 @@ az aks get-credentials --admin --name CircleCI-Cluster  --resource-group CircleC
 
 az ad sp create-for-rbac --name circleci-deploy-account 
 
-
-(⎈ |CircleCI-Cluster-admin:default)➜  .circleci git:(main) ✗ kubectl get pods
-NAME                                   READY   STATUS    RESTARTS   AGE
-ci-demo-application-5467fcb87d-z7dmn   1/1     Running   0          36s
